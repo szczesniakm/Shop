@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Nowy folder1\**" />
+    <Compile Remove="Nowy folder\**" />
     <Compile Remove="Products\Nowy folder\**" />
     <Compile Remove="Users\Commands\ChangeEmail\**" />
     <Compile Remove="Users\Commands\Nowy folder\**" />
+    <EmbeddedResource Remove="Nowy folder1\**" />
+    <EmbeddedResource Remove="Nowy folder\**" />
     <EmbeddedResource Remove="Products\Nowy folder\**" />
     <EmbeddedResource Remove="Users\Commands\ChangeEmail\**" />
     <EmbeddedResource Remove="Users\Commands\Nowy folder\**" />
+    <None Remove="Nowy folder1\**" />
+    <None Remove="Nowy folder\**" />
     <None Remove="Products\Nowy folder\**" />
     <None Remove="Users\Commands\ChangeEmail\**" />
     <None Remove="Users\Commands\Nowy folder\**" />

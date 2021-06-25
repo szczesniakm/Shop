@@ -27,15 +27,24 @@ namespace Shop.DataAccess.DbContexts
                 .HasKey(c => c.UserId);
 
             modelBuilder.Entity<Customer>()
+                .Property(c => c.CartId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Customer>()
                 .HasOne(c => c.User)
                 .WithOne()
                 .HasForeignKey<Customer>(c => c.UserId);
 
             modelBuilder.Entity<Customer>()
                 .HasOne(c => c.Cart)
+                .WithOne(c => c.Customer)
+                .HasForeignKey<Cart?>(c => c.CustomerId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Cart>()
+                .HasMany(c => c.Items)
                 .WithOne()
-                .IsRequired(false)
-                .HasForeignKey<Cart>(c => c.Id);
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
     }
 }

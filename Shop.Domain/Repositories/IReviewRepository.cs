@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain.Repositories
 {
-    public interface IProductRepository
+    public interface IReviewRepository
     {
-        Task<Product> GetAsync(Guid id);
-        Task<Product> GetBySlugAsync(string slug);
-        Task UpdateAsync(Product product);
+        Task AddAsync(Review review);
+        Task<Review> GetAsync(Guid id);
+        Task UpdateAsync(Review review);
+        Task RemoveAsync(Review review);
         Task Save();
     }
 }

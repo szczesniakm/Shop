@@ -15,12 +15,15 @@ namespace Shop.Application.Products.Commands
     {
         private readonly IProductRepository _productRepository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IReviewRepository _reviewRepository;
 
         public AddProductReviewHandler(IProductRepository productRepository,
-            ICustomerRepository customerRepository)
+            ICustomerRepository customerRepository,
+            IReviewRepository reviewRepository)
         {
             _productRepository = productRepository;
             _customerRepository = customerRepository;
+            _reviewRepository = reviewRepository;
         }
 
         public async Task<Unit> Handle(AddProductReview request, CancellationToken cancellationToken)
@@ -39,7 +42,7 @@ namespace Shop.Application.Products.Commands
             var review = new Review(request.Rating, request.Description, customer);
             product.AddReview(review);
 
-            await _productRepository.AddReviewAsync(review);
+            await _reviewRepository.AddAsync(review);
             await _productRepository.Save();
 
             return Unit.Value;

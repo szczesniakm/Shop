@@ -37,11 +37,6 @@ namespace Shop.DataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task AddReviewAsync(Review review)
-        {
-            await _context.Reviews.AddAsync(review);
-        }
-
         public async Task Save()
         {
             await _context.SaveChangesAsync();

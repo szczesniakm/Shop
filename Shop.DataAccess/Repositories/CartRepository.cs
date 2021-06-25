@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.DataAccess.Repositories
 {
-    class CartRepository : ICartRepository
+    public class CartRepository : ICartRepository
     {
         private readonly ShopContext _context;
         private readonly DbSet<Cart> _carts;
@@ -28,7 +28,7 @@ namespace Shop.DataAccess.Repositories
 
         public async Task<Cart> GetAsync(Guid id)
         {
-            return await _carts.FindAsync(id);
+            return await _carts.Include(c => c.Items).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task RemoveAsync(Cart cart)

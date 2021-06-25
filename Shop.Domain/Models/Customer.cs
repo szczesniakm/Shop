@@ -14,7 +14,9 @@ namespace Shop.Domain.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
+
         public virtual Cart Cart { get; set; }
+        public Guid? CartId { get; set; }
 
         public IReadOnlyCollection<Address>  Addresses 
         { 
@@ -40,6 +42,11 @@ namespace Shop.Domain.Models
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
+        }
+
+        public void AddCart(Cart cart)
+        {
+            Cart = cart;
         }
     }
 }

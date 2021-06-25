@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Products.Commands;
+using Shop.Application.Products.Commands.RemoveProductReview;
 using Shop.Application.Products.Queries;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,18 @@ namespace Shop.Api.Controllers
         {
             request.UserId = UserId;
             request.Slug = slug;
+
+            await Mediator.Send(request);
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete("{slug}/reviews/{reviewId}")]
+        public async Task<IActionResult> RemoveProductReview([FromBody] RemoveProductReview request, Guid reviewId)
+        {
+            request.UserId = UserId;
+            request.ReviewId = reviewId;
 
             await Mediator.Send(request);
 
