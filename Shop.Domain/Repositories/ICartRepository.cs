@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain.Repositories
 {
-    public interface ICartRepository : IDisposable
+    public interface ICartRepository
     {
         Task AddAsync(Cart cart);
         Task<Cart> GetAsync(Guid id);

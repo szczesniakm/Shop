@@ -11,6 +11,11 @@ namespace Shop.Domain.Models
         
         public Guid Id { get; set; }
         public IReadOnlyList<ProductItem> Items { get { return _items; } }
+        public decimal Total
+        {
+            get { return _items.Sum(x => x.Quantity * x.Product.Price); }
+        }
+
         public Customer Customer { get; set; }
         public Guid? CustomerId { get; set; }
 

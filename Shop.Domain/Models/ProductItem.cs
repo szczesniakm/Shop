@@ -8,8 +8,7 @@ namespace Shop.Domain.Models
         public Product Product { get; set; }
         public int Quantity  {get; set; }
 
-        public ProductItem()
-        { }
+        public ProductItem() { }
 
         public ProductItem(Product product, int quantity)
         {

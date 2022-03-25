@@ -9,8 +9,7 @@ namespace Shop.Domain.Models
         public string Description { get; set; }
         public Customer Customer { get; set; }
 
-        private Review()
-        { }
+        private Review() { }
 
         public Review(decimal rating, string description, Customer customer)
         {

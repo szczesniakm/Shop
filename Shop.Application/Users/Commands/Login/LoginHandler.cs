@@ -3,10 +3,6 @@ using Shop.Application.Exceptions;
 using Shop.Application.Utils;
 using Shop.Domain.Repositories;
 using Shop.Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +21,7 @@ namespace Shop.Application.Users.Commands.Login
             _jwtService = jwtService;
         }
 
-        async Task<JwtDto> IRequestHandler<Login, JwtDto>.Handle(Login request, CancellationToken cancellationToken)
+        public async Task<JwtDto> Handle(Login request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByEmailAsync(request.Email);
             if (user == null)
@@ -42,7 +38,7 @@ namespace Shop.Application.Users.Commands.Login
                 throw new ServiceException("user_inactive", "Verify your e-mail address.");
             }
             var token = _jwtService.CreateToken(user.Id, "user");
- 
+
             return token;
         }
     }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Customers.Queries.GetCustomerDetails
+namespace Shop.Application.Customers.Queries.GetCustomerOrders
 {
-    public class GetCustomerDetails : IRequest<CustomerDetailsDto>
+    public class GetCustomerOrders : IRequest<IEnumerable<OrderDto>>
     {
         public Guid Id { get; set; }
     }

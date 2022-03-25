@@ -5,31 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Nowy folder1\**" />
-    <Compile Remove="Nowy folder\**" />
-    <Compile Remove="Products\Nowy folder\**" />
-    <Compile Remove="Users\Commands\ChangeEmail\**" />
-    <Compile Remove="Users\Commands\Nowy folder\**" />
-    <EmbeddedResource Remove="Nowy folder1\**" />
-    <EmbeddedResource Remove="Nowy folder\**" />
-    <EmbeddedResource Remove="Products\Nowy folder\**" />
-    <EmbeddedResource Remove="Users\Commands\ChangeEmail\**" />
-    <EmbeddedResource Remove="Users\Commands\Nowy folder\**" />
-    <None Remove="Nowy folder1\**" />
-    <None Remove="Nowy folder\**" />
-    <None Remove="Products\Nowy folder\**" />
-    <None Remove="Users\Commands\ChangeEmail\**" />
-    <None Remove="Users\Commands\Nowy folder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Customers\UpdateCustomerDetails\Nowy dokument tekstowy.txt" />
-    <None Remove="Services\Nowy dokument tekstowy.txt" />
-    <None Remove="Users\Commands\ChangePassword\Nowy dokument tekstowy.txt" />
-    <None Remove="Users\Commands\VerifyEmail\Nowy dokument tekstowy.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.7" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />

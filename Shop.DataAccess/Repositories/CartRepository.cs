@@ -3,9 +3,6 @@ using Shop.DataAccess.DbContexts;
 using Shop.Domain.Models;
 using Shop.Domain.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Shop.DataAccess.Repositories
@@ -28,7 +25,7 @@ namespace Shop.DataAccess.Repositories
 
         public async Task<Cart> GetAsync(Guid id)
         {
-            return await _carts.Include(c => c.Items).FirstOrDefaultAsync(c => c.Id == id);
+            return await _carts.Include(c => c.Items).ThenInclude(i => i.Product).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task RemoveAsync(Cart cart)

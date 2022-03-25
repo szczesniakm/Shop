@@ -28,7 +28,11 @@ namespace Shop.DataAccess.Repositories
 
         public async Task<IEnumerable<Order>> GetAllUserOrders(Guid customerId)
         {
-            return await _orders.Where(o => o.Customer.UserId == customerId).ToListAsync();
+            return await _orders.Include(o => o.BillingAddress)
+                .Include(o => o.ShippingAddress)
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .Include(o => o.Customer).Where(o => o.Customer.UserId == customerId).ToListAsync();
         }
 
         public async Task<Order> GetOrder(Guid id)

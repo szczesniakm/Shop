@@ -28,8 +28,7 @@ namespace Shop.Domain.Models
             get { return _orders; }
         }
 
-        private Customer()
-        {}
+        private Customer() {}
 
         public Customer(User user, string firstName, string lastName, string phoneNumber)
         {

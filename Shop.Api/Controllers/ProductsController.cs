@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Products.Commands;
 using Shop.Application.Products.Commands.RemoveProductReview;
 using Shop.Application.Products.Queries;
+using Shop.Application.Products.Queries.GetAllProducts;
+using Shop.Application.Products.Queries.GetProduct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +22,18 @@ namespace Shop.Api.Controllers
         {
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            var request = new GetAllProducts();
+
+            var products = await Mediator.Send(request);
+
+            return Ok(products);
+        }
+
         [HttpGet("{slug}")]
-        public async Task<IActionResult> GetProducts(string slug)
+        public async Task<IActionResult> GetProduct(string slug)
         {
             var request = new GetProduct { Slug = slug };
 
@@ -39,19 +51,22 @@ namespace Shop.Api.Controllers
 
             await Mediator.Send(request);
 
-            return Ok();
+            return NoContent();
         }
 
         [Authorize]
         [HttpDelete("{slug}/reviews/{reviewId}")]
-        public async Task<IActionResult> RemoveProductReview([FromBody] RemoveProductReview request, Guid reviewId)
+        public async Task<IActionResult> RemoveProductReview(Guid reviewId)
         {
-            request.UserId = UserId;
-            request.ReviewId = reviewId;
-
+            var request = new RemoveProductReview
+            {
+                UserId = UserId,
+                ReviewId = reviewId
+            };
+               
             await Mediator.Send(request);
 
-            return Ok();
+            return NoContent();
         }
     }
 }

@@ -28,11 +28,13 @@ namespace Shop.Application.Utils
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
+            var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Issuer = _jwtSettings.Issuer,
-                Expires = now.AddMinutes(_jwtSettings.ExpiryMinutes),
+                Expires = expires,
                 SigningCredentials = new SigningCredentials
                 (new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -41,7 +43,7 @@ namespace Shop.Application.Utils
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return new JwtDto(tokenHandler.WriteToken(token));
+            return new JwtDto(tokenHandler.WriteToken(token), expires);
         }
     }
 }

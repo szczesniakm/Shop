@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Shop.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,24 +10,22 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Customers.Queries.GetCustomerDetails
 {
-    public class GetCustomerDetailsHandler : IRequestHandler<GetCustomerDetails, CustomerDetails>
+    public class GetCustomerDetailsHandler : IRequestHandler<GetCustomerDetails, CustomerDetailsDto>
     {
-        private ICustomerRepository _customerRepository;
-
-        public GetCustomerDetailsHandler(ICustomerRepository customerRepository)
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
+        public GetCustomerDetailsHandler(ICustomerRepository customerRepository,
+            IMapper mapper)
         {
             _customerRepository = customerRepository;
+            _mapper = mapper;
         }
 
-        async Task<CustomerDetails> IRequestHandler<GetCustomerDetails, CustomerDetails>.Handle(GetCustomerDetails request, CancellationToken cancellationToken)
+        async Task<CustomerDetailsDto> IRequestHandler<GetCustomerDetails, CustomerDetailsDto>.Handle(GetCustomerDetails request, CancellationToken cancellationToken)
         {
             var result = await _customerRepository.GetAsync(request.Id);
 
-            return new CustomerDetails
-            {
-                FirstName = result.FirstName,
-                LastName = result.LastName
-            };
+            return _mapper.Map<CustomerDetailsDto>(result);
         }
     }
 }

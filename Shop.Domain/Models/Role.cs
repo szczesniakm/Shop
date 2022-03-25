@@ -4,6 +4,5 @@ namespace Shop.Domain.Models
     {
         User,
         Admin,
-
     }
 }

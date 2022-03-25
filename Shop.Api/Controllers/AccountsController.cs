@@ -23,14 +23,13 @@ namespace Shop.Api.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUser request)
         {
             await Mediator.Send(request);
-            return Ok();
+            return NoContent();
         }
 
-        [HttpPost("login/")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login request)
         {
-            var token = await Mediator.Send(request);
-            return Ok(token);
+            return Ok(await Mediator.Send(request));
         }
 
         [HttpPut]

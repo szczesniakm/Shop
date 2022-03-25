@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
-using Shop.Domain.Models;
 using Shop.Domain.Repositories;
 
-namespace Shop.Application.Products.Queries
+namespace Shop.Application.Products.Queries.GetProduct
 {
-    public class GetProductHandler : IRequestHandler<GetProduct, Product>
+    public class GetProductHandler : IRequestHandler<GetProduct, ProductDto>
     {
         private readonly IProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
-        public GetProductHandler(IProductRepository productRepository)
+        public GetProductHandler(
+            IProductRepository productRepository,
+            IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
-        async Task<Product> IRequestHandler<GetProduct, Product>.Handle(GetProduct request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(GetProduct request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetBySlugAsync(request.Slug);
-            return product;
+
+            return _mapper.Map<ProductDto>(product);
         }
     }
 }

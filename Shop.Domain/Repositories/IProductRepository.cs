@@ -10,6 +10,7 @@ namespace Shop.Domain.Repositories
     public interface IProductRepository
     {
         Task<Product> GetAsync(Guid id);
+        Task<IEnumerable<Product>> GetAllAsync();
         Task<Product> GetBySlugAsync(string slug);
         Task UpdateAsync(Product product);
         Task Save();

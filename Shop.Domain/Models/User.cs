@@ -4,15 +4,16 @@ namespace Shop.Domain.Models
 {
     public class User
     {
-        public Guid Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public Role Role { get; set; }
-        public string SecurityCode { get; set; }
-        public DateTime SecurityCodeExpirationDate { get; set; }
-        public bool EmailConfirmed { get; set; }
+        public Guid Id { get; protected set; }
+        public string Email { get; protected set; }
+        public string Password { get; protected set; }
+        public DateTime CreatedOn { get; protected set; }
+        public Role Role { get; protected set; }
+        public string SecurityCode { get; protected set; }
+        public DateTime SecurityCodeExpirationDate { get; protected set; }
+        public bool EmailConfirmed { get; protected set; }
 
+        private User() { }
         public User(Guid id, string email, string password, DateTime createdOn, Role role, string securityCode, DateTime securityCodeExpirationDate, bool emailConfirmed)
         {
             Id = id;

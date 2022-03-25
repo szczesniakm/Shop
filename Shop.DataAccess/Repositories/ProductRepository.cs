@@ -26,6 +26,11 @@ namespace Shop.DataAccess.Repositories
             return await _products.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Product>> GetAllAsync()
+        {
+            return await _products.ToListAsync();
+        }
+
         public async Task<Product> GetBySlugAsync(string slug)
         {
             return await _products.Include(p => p.Reviews).FirstOrDefaultAsync(p => p.Slug == slug);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Carts.Commands.CreateCart;
 using Shop.Application.Carts.Commands.DeleteCart;
 using Shop.Application.Carts.Commands.PutItemsToCart;
+using Shop.Application.Carts.Queries.GetCart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,16 @@ namespace Shop.Api.Controllers
             return Ok(cartId);
         }
 
+        [HttpGet("{cartId}")]
+        public async Task<IActionResult> GetCart(Guid cartId)
+        {
+            var request = new GetCart { CartId = cartId };
+
+            var cart = await Mediator.Send(request);
+
+            return Ok(cart);
+        }
+
         [HttpPut("{cartId}")]
         public async Task<IActionResult> UpdateCart([FromBody] PutItemsToCart request, Guid cartId)
         {
@@ -37,7 +48,7 @@ namespace Shop.Api.Controllers
 
             await Mediator.Send(request);
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpDelete("{cartId}")]
@@ -51,7 +62,7 @@ namespace Shop.Api.Controllers
 
             await Mediator.Send(request);
 
-            return Ok();
+            return NoContent();
         }
     }
 }

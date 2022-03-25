@@ -28,7 +28,7 @@ namespace Shop.DataAccess.Repositories
 
         public async Task<Customer> GetAsync(Guid id)
         {
-            return await _customers.Include(c => c.Cart).Include(c => c.Orders).FirstOrDefaultAsync(c => c.UserId == id);
+            return await _customers.Include(c => c.Cart).Include(c => c.Orders).Include(c => c.Cart.Items).FirstOrDefaultAsync(c => c.UserId == id);
         }
 
         public async Task RemoveAsync(Customer customer)

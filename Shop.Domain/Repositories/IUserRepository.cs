@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Domain.Repositories
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         Task AddAsync(User user);
         Task<User> GetAsync(Guid id);
